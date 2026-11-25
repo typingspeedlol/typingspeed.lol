@@ -1,0 +1,2721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>typingspeed.lol — kinetic arcade typing test</title>
+  <meta name="description" content="Ultra-lightweight neo-brutalist typing speed arcade for typingspeed.lol. Clean, fast, and fun with Sprint, Sudden Death, Chaos .lol, and Zen modes." />
+  <meta name="robots" content="index, follow" />
+
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="./favicon.ico" sizes="48x48">
+  <link rel="apple-touch-icon" href="./apple-touch-icon.png">
+  <meta name="theme-color" content="#FFE600">
+
+  <!-- ========================================================================
+       GOOGLE ADSENSE PUBLISHER SCRIPT (Replace ca-pub-XXXXXXXXXXXXXXXX with your ID)
+       ======================================================================== -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=pub-3560973359018353"
+       crossorigin="anonymous"></script>
+  <!-- End-->
+
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS — DAYLIGHT NEO-BRUTALIST & KINETIC ARCADE
+       ========================================================================== */
+    :root {
+      --bg-paper: #FAF8F2;
+      --bg-card: #FFFFFF;
+      --bg-muted: #F1EFE7;
+      --ink: #121212;
+      --ink-soft: #64615B;
+      --ink-ghost: #B5B1A8;
+      --yellow: #FFE600;
+      --violet: #7C3AED;
+      --violet-soft: #EDE9FE;
+      --coral: #FF4D36;
+      --green: #16A34A;
+      --cursor-bg: rgba(255, 230, 0, 0.92);
+      --cursor-line: #121212;
+      --border-w: 2.5px;
+      --shadow-sm: 3px 3px 0px var(--ink);
+      --shadow-md: 5px 5px 0px var(--ink);
+      --shadow-lg: 8px 8px 0px var(--ink);
+      --font-sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    /* ==========================================================================
+       ZEN DARK MODE TOKENS (LOW-GLARE NOCTURNAL STUDIO + WHITE HOVER REVEAL)
+       ========================================================================== */
+    html.zen-dark,
+    body.zen-dark {
+      --bg-paper: #0B0C0E;
+      --bg-card: #121418;
+      --bg-muted: #191C22;
+      --ink: #E5E7EB;
+      --ink-soft: #6B7280;
+      --ink-ghost: #374151;
+      --yellow: #FFE600;
+      --violet: #8B5CF6;
+      --violet-soft: #1E1B2E;
+      --coral: #FF5A47;
+      --green: #22C55E;
+      --cursor-bg: rgba(255, 230, 0, 0.24);
+      --cursor-line: #FFE600;
+      --shadow-sm: 3px 3px 0px #000000;
+      --shadow-md: 5px 5px 0px #000000;
+      --shadow-lg: 8px 8px 0px #000000;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+    }
+
+    body.zen-dark .brand-pill,
+    body.zen-dark .mode-cluster,
+    body.zen-dark .util-pill,
+    body.zen-dark .focus-card,
+    body.zen-dark .receipt-card,
+    body.zen-dark .ad-slot-card,
+    body.zen-dark .modal-box {
+      border-color: #262A33;
+    }
+
+    /* Darkened chrome buttons in Zen mode that illuminate crisp white on hover */
+    body.zen-dark .brand-pill,
+    body.zen-dark .mode-cluster,
+    body.zen-dark .util-pill {
+      background: #101216;
+      color: #6B7280;
+      transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease, transform 80ms ease;
+    }
+
+    body.zen-dark .brand-pill .dot-lol {
+      background: #1E2128;
+      color: #9CA3AF;
+      border-color: #2E333E;
+      transition: background-color 140ms ease, color 140ms ease, border-color 140ms ease;
+    }
+
+    body.zen-dark .brand-pill:hover {
+      background: #FFFFFF;
+      color: #121212;
+      border-color: #FFFFFF;
+    }
+
+    body.zen-dark .brand-pill:hover .dot-lol {
+      background: var(--yellow);
+      color: #121212;
+      border-color: #121212;
+    }
+
+    body.zen-dark .mode-tab {
+      color: #6B7280;
+    }
+
+    body.zen-dark .mode-tab.active {
+      background: #1E222B;
+      color: #D1D5DB;
+    }
+
+    body.zen-dark .mode-tab:hover,
+    body.zen-dark .dur-pill:hover,
+    body.zen-dark .util-pill:hover,
+    body.zen-dark .footer-link:hover {
+      background: #FFFFFF !important;
+      color: #121212 !important;
+      border-color: #FFFFFF !important;
+    }
+
+    body.zen-dark .dur-pill {
+      color: #6B7280;
+    }
+
+    body.zen-dark .dur-pill.active {
+      background: #232732;
+      color: #E5E7EB;
+      border-color: #374151;
+    }
+
+    body.zen-dark .pb-pill {
+      background: #13151B;
+      color: #6B7280;
+    }
+
+    body.zen-dark .flow-pill {
+      border-color: #2A2F3A;
+      color: #9CA3AF;
+    }
+
+    body.zen-dark .flow-pill.tier-2 {
+      background: var(--yellow);
+      color: #121212;
+    }
+
+    body.zen-dark .word-slot.prev-one {
+      color: #6B7280;
+      opacity: 0.65;
+    }
+
+    body.zen-dark .word-slot.passed-far {
+      color: #374151;
+      opacity: 0.22;
+    }
+
+    body.zen-dark .word-slot.next-up {
+      color: #9CA3AF;
+      opacity: 0.85;
+    }
+
+    body.zen-dark .blur-veil {
+      background: rgba(11, 12, 14, 0.88);
+    }
+
+    body.zen-dark .veil-pill,
+    body.zen-dark .hint-badge,
+    body.zen-dark .rank-tag,
+    body.zen-dark .stat-box.primary,
+    body.zen-dark .action-btn.yellow {
+      color: #121212;
+      border-color: #121212;
+    }
+
+    body.zen-dark kbd {
+      background: #15181E;
+      border-color: #2C313C;
+      box-shadow: 1.5px 1.5px 0 #000000;
+      color: #9CA3AF;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      min-height: 100%;
+      background-color: var(--bg-paper);
+      background-image: radial-gradient(rgba(18, 18, 18, 0.1) 1px, transparent 1px);
+      background-size: 22px 22px;
+      transition: background-color 220ms ease;
+    }
+
+    html.zen-dark {
+      background-color: #0B0C0E;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+      color-scheme: dark;
+    }
+
+    body {
+      min-height: 100vh;
+      background-color: transparent;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: color 220ms ease;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 1.25rem 1.25rem 1.5rem;
+      gap: 1.5rem;
+    }
+
+    button {
+      font-family: inherit;
+      color: inherit;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* ==========================================================================
+       2. SINGLE SLEEK TOP BAR (BRAND + MODES + SFX/PB)
+       ========================================================================== */
+    .top-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: var(--bg-card);
+      border: var(--border-w) solid var(--ink);
+      border-radius: 12px;
+      padding: 0.45rem 0.85rem;
+      font-weight: 900;
+      font-size: 1.1rem;
+      letter-spacing: -0.03em;
+      box-shadow: var(--shadow-sm);
+      user-select: none;
+    }
+
+    .brand-pill .dot-lol {
+      background: var(--yellow);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 0.05rem 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 900;
+      color: #121212;
+    }
+
+    /* Center Mode Switcher */
+    .mode-cluster {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-card);
+      border: var(--border-w) solid var(--ink);
+      border-radius: 14px;
+      padding: 0.3rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .mode-tab {
+      padding: 0.4rem 0.8rem;
+      border-radius: 9px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--ink-soft);
+      transition: background-color 110ms ease, color 110ms ease;
+    }
+
+    .mode-tab:hover {
+      color: var(--ink);
+      background: var(--bg-muted);
+    }
+
+    .mode-tab.active {
+      background: var(--ink);
+      color: var(--yellow);
+    }
+
+    .sprint-durations {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      padding-left: 0.25rem;
+      border-left: 2px solid var(--bg-muted);
+    }
+
+    .sprint-durations.hidden {
+      display: none;
+    }
+
+    .dur-pill {
+      padding: 0.32rem 0.55rem;
+      border-radius: 7px;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--ink-soft);
+    }
+
+    .dur-pill:hover {
+      background: var(--bg-muted);
+      color: var(--ink);
+    }
+
+    .dur-pill.active {
+      background: var(--yellow);
+      color: #121212;
+      border: 1.5px solid #121212;
+    }
+
+    /* Right Utility Pills */
+    .utility-cluster {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .util-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-card);
+      border: var(--border-w) solid var(--ink);
+      border-radius: 10px;
+      padding: 0.42rem 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+      box-shadow: var(--shadow-sm);
+      transition: transform 80ms ease, box-shadow 80ms ease, background-color 120ms ease;
+    }
+
+    .util-pill:hover {
+      background: var(--yellow);
+    }
+
+    .util-pill:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+    .pb-pill {
+      background: var(--violet-soft);
+      color: var(--violet);
+      cursor: default;
+    }
+
+    .pb-pill:hover {
+      background: var(--violet-soft);
+    }
+
+    /* ==========================================================================
+       3. UNCLUTTERED FOCUS TYPING CARD & CONTINUOUS TRAIN TRACK
+       ========================================================================== */
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .focus-card {
+      position: relative;
+      width: 100%;
+      background: var(--bg-card);
+      border: var(--border-w) solid var(--ink);
+      border-radius: 20px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      cursor: text;
+      user-select: none;
+      transition: box-shadow 180ms ease, border-color 180ms ease, background-color 220ms ease;
+    }
+
+    /* Electric violet overdrive glow when streak/momentum is high */
+    .focus-card.overdrive {
+      border-color: var(--violet);
+      box-shadow: 8px 8px 0px var(--violet);
+    }
+
+    .focus-card.shake {
+      animation: microShake 0.22s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      border-color: var(--coral);
+    }
+
+    @keyframes microShake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      50% { transform: translateX(6px); }
+      75% { transform: translateX(-3px); }
+    }
+
+    /* Slim Top Progress / Pace Bar */
+    .top-progress-track {
+      width: 100%;
+      height: 7px;
+      background: var(--bg-muted);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    body.zen-dark .top-progress-track {
+      border-bottom-color: #262A33;
+    }
+
+    .top-progress-fill {
+      height: 100%;
+      width: 100%;
+      background: var(--yellow);
+      transition: width 120ms linear, background-color 150ms ease;
+    }
+
+    .top-progress-fill.danger {
+      background: var(--coral);
+    }
+
+    .top-progress-fill.violet {
+      background: var(--violet);
+    }
+
+    /* Minimal Inline Telemetry Strip inside Card */
+    .card-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.75rem 0;
+      font-family: var(--font-mono);
+    }
+
+    .hud-left {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+    }
+
+    .metric-group {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .metric-big {
+      font-size: 1.65rem;
+      font-weight: 900;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-unit {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: var(--ink-soft);
+      text-transform: uppercase;
+    }
+
+    .pace-delta {
+      font-size: 0.78rem;
+      font-weight: 800;
+      padding: 0.15rem 0.45rem;
+      border-radius: 6px;
+    }
+
+    .pace-delta.ahead {
+      background: #DCFCE7;
+      color: #16A34A;
+    }
+
+    .pace-delta.behind {
+      background: #FEE2E2;
+      color: #FF4D36;
+    }
+
+    /* Flow / Streak Multiplier Pill */
+    .flow-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.32rem 0.75rem;
+      border: 2px solid var(--ink);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      background: var(--bg-muted);
+      transition: transform 120ms cubic-bezier(0.34, 1.56, 0.64, 1), background-color 150ms ease, color 150ms ease;
+    }
+
+    .flow-pill.tier-2 {
+      background: var(--yellow);
+      color: #121212;
+    }
+
+    .flow-pill.tier-3 {
+      background: var(--violet);
+      color: #fff;
+      transform: scale(1.04);
+    }
+
+    .flow-pill.tier-4 {
+      background: var(--coral);
+      color: #fff;
+      transform: scale(1.08) rotate(-1.5deg);
+    }
+
+    /* Spacious Single-Baseline Train-Track Typing Canvas */
+    .typing-stage {
+      position: relative;
+      padding: calc(3.4rem - 14px) 2.25rem 3.8rem;
+      min-height: 215px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .baseline-stream {
+      position: relative;
+      width: 100%;
+      padding-top: 14px; /* headroom so the cursor marker isn't clipped by overflow:hidden */
+      overflow: hidden;
+      font-family: var(--font-mono);
+      font-size: clamp(2.15rem, 4.8vw, 3.1rem);
+      font-weight: 800;
+      letter-spacing: 0.025em;
+      line-height: 1.25;
+      white-space: nowrap;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+      mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    }
+
+    /* Fixed cursor / anchor pinned ~3-4 positions in from the left while words glide beneath */
+    .fixed-cursor-anchor {
+      position: absolute;
+      top: 0; /* size + vertical position are measured from the real character cell in JS */
+      left: var(--cursor-left, 25%);
+      transform: translateX(-50%);
+      width: 0.65em;
+      height: 1.25em;
+      border-radius: 5px;
+      background: var(--cursor-bg);
+      box-shadow: inset 0 -3px 0 var(--cursor-line);
+      pointer-events: none;
+      z-index: 0; /* sits BEHIND the text so letter colours stay crisp */
+      transition: left 180ms ease;
+    }
+
+    .fixed-cursor-caret {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 7px solid var(--violet);
+    }
+
+    .train-track {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0; /* word separation is a real space cell (.ch.sp), so the caret treats it like any letter */
+      position: relative;
+      z-index: 1;
+      transform: translate3d(0px, 0px, 0px);
+      transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+
+    .train-track.no-transition {
+      transition: none;
+    }
+
+    .word-slot {
+      display: inline-flex;
+      align-items: baseline;
+      flex-shrink: 0;
+      color: var(--ink-soft);
+      font-weight: 700;
+      opacity: 0.82;
+      transition: color 120ms ease, opacity 140ms ease;
+    }
+
+    /* Just-completed word (1 behind current): stays readable so transition feels continuous */
+    .word-slot.prev-one {
+      color: var(--ink-soft);
+      opacity: 0.65;
+    }
+
+    /* Words 2+ behind current: faded out cleanly */
+    .word-slot.passed-far {
+      color: var(--ink-ghost);
+      opacity: 0.24;
+    }
+
+    .word-slot.active {
+      color: var(--ink);
+      font-weight: 800;
+      opacity: 1;
+    }
+
+    .word-slot.next-up {
+      color: var(--ink-soft);
+      opacity: 0.85;
+    }
+
+    .ch {
+      position: relative;
+      display: inline-block;
+      padding: 0 1px;
+      border-radius: 5px;
+      color: inherit;
+      transition: background-color 65ms ease, color 65ms ease;
+    }
+
+    .ch.typed-ok {
+      color: var(--green);
+    }
+
+    .ch.typed-err {
+      color: var(--coral);
+      text-decoration: underline;
+      text-decoration-thickness: 3.5px;
+      text-underline-offset: 6px;
+      background: rgba(255, 77, 54, 0.12);
+    }
+
+    .ch.typed-extra {
+      color: var(--coral);
+      opacity: 0.85;
+      text-decoration: line-through;
+    }
+
+    /* The caret cell is only a marker for JS; the visible cursor is .fixed-cursor-anchor */
+    .ch.current {
+      color: inherit;
+    }
+
+    /* The space after each word is a normal character cell (same box, same
+       baseline, same highlight as a letter) so the caret never changes size/height. */
+    .ch.sp {
+      color: transparent;
+    }
+
+    /* Extra (overflow) characters ease their width in/out in sync with the track glide,
+       so text to the right of them never snaps. 1ch + letter-spacing + padding = one cell. */
+    .ch.grow {
+      z-index: 2;
+      animation: chGrow 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    .ch.ghost {
+      display: none;
+    }
+
+    .ch.ghost.run {
+      display: inline-block;
+      z-index: 2;
+      pointer-events: none;
+      animation: chShrink 420ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes chGrow {
+      from { margin-right: calc(-1 * (1ch + 0.025em + 2px)); opacity: 0; }
+      to   { margin-right: 0; opacity: 0.85; }
+    }
+
+    @keyframes chShrink {
+      from { margin-right: 0; opacity: 0.85; }
+      to   { margin-right: calc(-1 * (1ch + 0.025em + 2px)); opacity: 0; }
+    }
+
+    .caps-warning {
+      position: absolute;
+      top: 0.7rem;
+      right: 1.25rem;
+      z-index: 6;
+      display: none;
+      align-items: center;
+      background: var(--coral);
+      color: #fff;
+      border: 2px solid #121212;
+      border-radius: 6px;
+      padding: 0.15rem 0.55rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      box-shadow: 2px 2px 0 #121212;
+      pointer-events: none;
+    }
+
+    .caps-warning.show {
+      display: inline-flex;
+    }
+
+    /* Subtle start prompt that vanishes on first keystroke */
+    .start-hint {
+      position: absolute;
+      bottom: 1.1rem;
+      left: 2.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 150ms ease;
+    }
+
+    .start-hint.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hint-badge {
+      background: var(--yellow);
+      border: 1.5px solid #121212;
+      border-radius: 5px;
+      padding: 0.12rem 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 900;
+      color: #121212;
+    }
+
+    /* Blur / Unfocused Overlay */
+    .blur-veil {
+      position: absolute;
+      inset: 0;
+      background: rgba(250, 248, 242, 0.88);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .focus-card.unfocused .blur-veil {
+      display: flex;
+    }
+
+    .veil-pill {
+      background: var(--yellow);
+      border: var(--border-w) solid #121212;
+      border-radius: 999px;
+      padding: 0.65rem 1.35rem;
+      font-weight: 900;
+      font-size: 0.92rem;
+      color: #121212;
+      box-shadow: var(--shadow-md);
+    }
+
+    #hidden-input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      width: 1px;
+      height: 1px;
+    }
+
+    /* ==========================================================================
+       4. PERFORATED ARCADE RECEIPT SCORECARD & ADSENSE RESULTS SLOT
+       ========================================================================== */
+    #receipt-view {
+      display: none;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.15rem;
+      animation: slideUpReceipt 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    #receipt-view.visible {
+      display: flex;
+    }
+
+    @keyframes slideUpReceipt {
+      from { opacity: 0; transform: translateY(14px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .receipt-card {
+      width: 100%;
+      max-width: 540px;
+      background: var(--bg-card);
+      border: var(--border-w) solid var(--ink);
+      border-radius: 18px;
+      padding: 1.6rem 1.6rem 1.75rem;
+      box-shadow: var(--shadow-lg);
+      font-family: var(--font-mono);
+    }
+
+    .receipt-header {
+      text-align: center;
+      border-bottom: 2.5px dashed var(--ink);
+      padding-bottom: 1rem;
+      margin-bottom: 1.15rem;
+    }
+
+    body.zen-dark .receipt-header,
+    body.zen-dark .receipt-actions {
+      border-color: #2E333E;
+    }
+
+    .receipt-title {
+      font-size: 1.2rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .receipt-sub {
+      font-size: 0.74rem;
+      color: var(--ink-soft);
+      margin-top: 0.2rem;
+    }
+
+    .rank-tag {
+      display: inline-block;
+      margin-top: 0.75rem;
+      background: var(--yellow);
+      border: 2px solid #121212;
+      border-radius: 999px;
+      padding: 0.3rem 0.9rem;
+      font-size: 0.84rem;
+      font-weight: 900;
+      color: #121212;
+      box-shadow: 2px 2px 0 #121212;
+    }
+
+    .new-pb-tag {
+      display: none;
+      margin-top: 0.5rem;
+      background: var(--violet);
+      color: #fff;
+      border: 2px solid #121212;
+      border-radius: 8px;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.76rem;
+      font-weight: 900;
+    }
+
+    .new-pb-tag.show {
+      display: inline-block;
+    }
+
+    .receipt-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .stat-box {
+      background: var(--bg-paper);
+      border: 2px solid var(--ink);
+      border-radius: 11px;
+      padding: 0.7rem 0.85rem;
+    }
+
+    body.zen-dark .stat-box,
+    body.zen-dark .sparkline-box {
+      border-color: #262A33;
+    }
+
+    .stat-box.primary {
+      background: var(--yellow);
+      color: #121212;
+    }
+
+    .stat-k {
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .stat-box.primary .stat-k {
+      color: #121212;
+    }
+
+    .stat-v {
+      font-size: 1.75rem;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .stat-v.md {
+      font-size: 1.35rem;
+    }
+
+    .sparkline-box {
+      background: var(--bg-paper);
+      border: 2px solid var(--ink);
+      border-radius: 11px;
+      padding: 0.75rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .sparkline-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      font-weight: 800;
+      margin-bottom: 0.35rem;
+    }
+
+    #sparkline-svg {
+      width: 100%;
+      height: 92px;
+      display: block;
+    }
+
+    .receipt-actions {
+      border-top: 2.5px dashed var(--ink);
+      padding-top: 1.05rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.05rem;
+      border: var(--border-w) solid #121212;
+      border-radius: 11px;
+      font-size: 0.82rem;
+      font-weight: 900;
+      box-shadow: var(--shadow-sm);
+      transition: transform 80ms ease, box-shadow 80ms ease;
+    }
+
+    .action-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #121212;
+    }
+
+    .action-btn.yellow {
+      background: var(--yellow);
+      color: #121212;
+    }
+
+    .action-btn.violet {
+      background: var(--violet);
+      color: #fff;
+    }
+
+    /* AdSense-Compliant Results-Only Container (Zero accidental click risk, clearly labeled) */
+    .ad-slot-card {
+      width: 100%;
+      max-width: 728px;
+      min-height: 112px;
+      background: var(--bg-card);
+      border: 2px dashed var(--ink-soft);
+      border-radius: 14px;
+      padding: 0.5rem 0.75rem 0.65rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+    }
+
+    .ad-disclosure {
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+
+    .ad-slot-inner {
+      width: 100%;
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ==========================================================================
+       5. FOOTER, LEGAL MODALS, CONSENT BANNER, CONFETTI & TOAST
+       ========================================================================== */
+    footer {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--ink-soft);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-link {
+      padding: 0.18rem 0.45rem;
+      border-radius: 6px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: background-color 110ms ease, color 110ms ease;
+    }
+
+    .footer-link:hover {
+      background: var(--yellow);
+      color: #121212;
+      text-decoration: none;
+    }
+
+    kbd {
+      background: var(--bg-card);
+      border: 1.5px solid var(--ink);
+      border-radius: 5px;
+      padding: 0.08rem 0.36rem;
+      font-size: 0.68rem;
+      box-shadow: 1.5px 1.5px 0 var(--ink);
+      color: var(--ink);
+    }
+
+    /* Policy / About / Contact Modal (Required for AdSense Approval) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(18, 18, 18, 0.72);
+      backdrop-filter: blur(3px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      z-index: 1200;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      width: 100%;
+      max-width: 640px;
+      max-height: 82vh;
+      overflow-y: auto;
+      background: var(--bg-card);
+      color: var(--ink);
+      border: var(--border-w) solid var(--ink);
+      border-radius: 18px;
+      padding: 1.5rem 1.65rem;
+      box-shadow: var(--shadow-lg);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 2px solid var(--bg-muted);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-head h2 {
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    .modal-close {
+      background: var(--yellow);
+      color: #121212;
+      border: 2px solid #121212;
+      border-radius: 8px;
+      padding: 0.25rem 0.65rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 900;
+    }
+
+    .modal-body h3 {
+      font-size: 0.96rem;
+      font-weight: 800;
+      margin: 1rem 0 0.35rem;
+    }
+
+    .modal-body p, .modal-body ul {
+      margin-bottom: 0.65rem;
+      color: var(--ink-soft);
+    }
+
+    .modal-body ul {
+      padding-left: 1.25rem;
+    }
+
+    .modal-body a {
+      color: var(--violet);
+      font-weight: 700;
+    }
+
+    /* Cookie & AdSense Consent Notice */
+    .consent-banner {
+      position: fixed;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 2rem);
+      max-width: 760px;
+      background: var(--bg-card);
+      color: var(--ink);
+      border: var(--border-w) solid var(--ink);
+      border-radius: 14px;
+      padding: 0.85rem 1.1rem;
+      box-shadow: var(--shadow-md);
+      display: none;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.8rem;
+      z-index: 1100;
+    }
+
+    .consent-banner.show {
+      display: flex;
+    }
+
+    .consent-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .consent-btn {
+      padding: 0.4rem 0.8rem;
+      border: 2px solid #121212;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    .consent-btn.accept {
+      background: var(--yellow);
+      color: #121212;
+    }
+
+    .consent-btn.essential {
+      background: var(--bg-muted);
+      color: var(--ink);
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    #toast {
+      position: fixed;
+      bottom: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: #121212;
+      color: var(--yellow);
+      border: 2px solid #121212;
+      border-radius: 999px;
+      padding: 0.5rem 1.1rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      font-weight: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 180ms ease;
+      z-index: 1000;
+      box-shadow: var(--shadow-sm);
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 640px) {
+      body { padding: 0.9rem; gap: 1rem; }
+      .typing-stage { padding: calc(2.5rem - 14px) 1.25rem 3rem; min-height: 175px; }
+      .card-hud { padding: 0.9rem 1.25rem 0; }
+      .start-hint { left: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- 1. SINGLE SLEEK TOP BAR -->
+  <header class="top-bar">
+    <div class="brand-pill">
+      <span>typingspeed</span><span class="dot-lol">.lol</span>
+    </div>
+
+    <nav class="mode-cluster" aria-label="Typing modes">
+      <button class="mode-tab active" data-mode="sprint">Sprint</button>
+      <div class="sprint-durations" id="sprint-durations">
+        <button class="dur-pill" data-sec="15">15s</button>
+        <button class="dur-pill active" data-sec="30">30s</button>
+        <button class="dur-pill" data-sec="60">60s</button>
+      </div>
+      <button class="mode-tab" data-mode="sudden">Sudden Death</button>
+      <button class="mode-tab" data-mode="chaos">Chaos .lol</button>
+      <button class="mode-tab" data-mode="zen">Zen</button>
+    </nav>
+
+    <div class="utility-cluster">
+      <button id="sfx-btn" class="util-pill" title="Cycle synth sound profile">
+        <span id="sfx-icon">🔊</span>
+        <span id="sfx-label">POP</span>
+      </button>
+      <div class="util-pill pb-pill" id="top-pb-badge" title="Personal Best for current mode">
+        🏆 PB: --
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. UNCLUTTERED FOCUS TYPING STAGE -->
+  <main id="play-view">
+    <section class="focus-card" id="focus-card" aria-label="Typing area">
+      <input
+        type="text"
+        id="hidden-input"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        aria-label="Type the highlighted word"
+      />
+
+      <!-- Slim Top Edge Progress / Pace Bar -->
+      <div class="top-progress-track">
+        <div class="top-progress-fill" id="top-progress-fill"></div>
+      </div>
+
+      <!-- Minimal Inline HUD Strip -->
+      <div class="card-hud">
+        <div class="hud-left">
+          <div class="metric-group">
+            <span class="metric-big" id="hud-primary">30s</span>
+            <span class="metric-unit" id="hud-primary-unit">left</span>
+          </div>
+          <div class="metric-group">
+            <span class="metric-big" id="hud-wpm">0</span>
+            <span class="metric-unit">wpm</span>
+            <span class="pace-delta" id="pace-delta" style="display:none"></span>
+          </div>
+        </div>
+
+        <div class="flow-pill" id="flow-pill">1x FLOW</div>
+      </div>
+
+      <!-- Spacious Single-Baseline Continuous Train-Track Word Stream -->
+      <div class="typing-stage">
+        <div class="caps-warning" id="caps-warning" role="status">⇪ CAPS LOCK IS ON</div>
+        <div class="baseline-stream" id="baseline-stream">
+          <div class="fixed-cursor-anchor" id="fixed-cursor-anchor" aria-hidden="true">
+            <div class="fixed-cursor-caret"></div>
+          </div>
+          <div class="train-track" id="train-track"></div>
+        </div>
+
+        <div class="start-hint" id="start-hint">
+          <span class="hint-badge">TYPE</span>
+          <span id="hint-text">start typing... space to advance</span>
+        </div>
+      </div>
+
+      <div class="blur-veil" id="blur-veil">
+        <div class="veil-pill">Click or press any key to focus</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 3. PERFORATED RECEIPT SCORECARD + ADSENSE RESULTS PLACEMENT -->
+  <section id="receipt-view" aria-label="Run scorecard receipt">
+    <div class="receipt-card">
+      <div class="receipt-header">
+        <div class="receipt-title">🧾 TYPINGSPEED.LOL RECEIPT</div>
+        <div class="receipt-sub" id="rec-subtitle">SPRINT 30S · VERIFIED KEYSTROKES</div>
+        <div class="rank-tag" id="rec-rank">☕ CAFFEINATED INTERN</div>
+        <div><span class="new-pb-tag" id="rec-pb-tag">🏆 NEW PERSONAL BEST!</span></div>
+      </div>
+
+      <div class="receipt-grid">
+        <div class="stat-box primary">
+          <div class="stat-k">NET WPM</div>
+          <div class="stat-v" id="rec-wpm">0</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-k">ACCURACY</div>
+          <div class="stat-v" id="rec-acc">100%</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-k">PEAK BURST</div>
+          <div class="stat-v md" id="rec-peak">0 WPM</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-k">MAX STREAK</div>
+          <div class="stat-v md" id="rec-streak">0 WORDS</div>
+        </div>
+      </div>
+
+      <div class="sparkline-box">
+        <div class="sparkline-head">
+          <span>WPM VELOCITY</span>
+          <span id="rec-raw">RAW: 0 WPM</span>
+        </div>
+        <svg id="sparkline-svg" viewBox="0 0 460 92" preserveAspectRatio="none"></svg>
+      </div>
+
+      <div class="receipt-actions">
+        <button id="play-again-btn" class="action-btn yellow">⚡ PLAY AGAIN</button>
+        <button id="copy-receipt-btn" class="action-btn violet">📋 COPY SCORE RECEIPT</button>
+      </div>
+    </div>
+
+    <!-- Dedicated Results-Page AdSense Unit (Only rendered on completed results screen) -->
+    <aside class="ad-slot-card" id="results-ad-slot" aria-label="Advertisement">
+      <span class="ad-disclosure">Advertisement</span>
+      <div class="ad-slot-inner" id="adsense-results-container">
+        <!--
+          Replace data-ad-client and data-ad-slot with your live AdSense unit IDs:
+          <ins class="adsbygoogle"
+               style="display:block;width:100%;max-width:728px;height:90px"
+               data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+               data-ad-slot="YYYYYYYYYY"
+               data-ad-format="horizontal"
+               data-full-width-responsive="true"></ins>
+        -->
+        <span style="font-family:var(--font-mono);font-size:0.74rem;color:var(--ink-soft);">
+          AdSense Results Banner Slot (728&times;90 Responsive)
+        </span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- 4. FOOTER WITH ADSENSE-REQUIRED POLICY & INFO LINKS -->
+  <footer>
+    <div><kbd>TAB</kbd> or <kbd>ESC</kbd> restart &bull; <kbd>CTRL+BKSP</kbd> clear word</div>
+    <nav class="footer-links" aria-label="Site information and policies">
+      <button type="button" class="footer-link" data-modal="about">About</button>
+      <button type="button" class="footer-link" data-modal="privacy">Privacy Policy</button>
+      <button type="button" class="footer-link" data-modal="terms">Terms</button>
+      <button type="button" class="footer-link" data-modal="contact">Contact</button>
+      <button type="button" class="footer-link" id="manage-cookies-btn">Cookies</button>
+    </nav>
+  </footer>
+
+  <!-- 5. LEGAL & COMPLIANCE MODAL -->
+  <div class="modal-backdrop" id="legal-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="modal-title">Information</h2>
+        <button type="button" class="modal-close" id="modal-close-btn">ESC / CLOSE</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- 6. COOKIE & ADSENSE CONSENT BANNER -->
+  <div class="consent-banner" id="consent-banner" role="region" aria-label="Cookie consent">
+    <div>
+      We store local preferences and high scores in your browser and display Google AdSense ads on the results screen.
+      <button type="button" class="footer-link" data-modal="privacy">Read Privacy Policy</button>
+    </div>
+    <div class="consent-actions">
+      <button type="button" class="consent-btn essential" id="consent-essential">Non-Personalized</button>
+      <button type="button" class="consent-btn accept" id="consent-accept">Accept All</button>
+    </div>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /**
+     * typingspeed.lol — Clean Kinetic Arcade Typing Engine
+     * Zero external dependencies, single-file static build.
+     */
+    (() => {
+      'use strict';
+
+      /* ======================================================================
+         1. CURATED WORD CORPORA
+         ====================================================================== */
+      const COMMON_WORDS = [
+        "time","way","year","work","day","world","life","hand","part","eye","place",
+        "week","case","point","number","group","fact","fast","speed","quick","spark",
+        "flash","laser","turbo","pulse","drift","glide","shift","click","press","space",
+        "enter","frame","pixel","logic","build","craft","sharp","fresh","clean","light",
+        "focus","rhythm","flow","combo","streak","score","level","power","boost","surge",
+        "blast","hyper","ultra","sonic","rapid","swift","brisk","agile","crisp","vivid",
+        "bold","prime","super","orbit","comet","rocket","planet","galaxy","vector",
+        "cipher","binary","signal","beacon","radar","bridge","tunnel","portal","engine",
+        "chrome","steel","carbon","quartz","copper","cobalt","neon","prism","mirror",
+        "shadow","echo","thunder","breeze","storm","frost","ember","flame","ocean",
+        "river","canyon","summit","ridge","valley","forest","meadow","bamboo","cedar",
+        "anchor","compass","voyage","harbor","island","canvas","sketch","draft","script",
+        "novel","chapter","verse","melody","tempo","chord","vinyl","sprint","motion"
+      ];
+
+      const CHAOS_WORDS = [
+        "silk_board_jam","filter_kaapi","git_push_-f","prod_on_friday","biryani_coma",
+        "chai_break","works_on_my_machine","404_not_found","lgtm!","sudo_rm_-rf",
+        "ctrl+z_pls","upi_scan_pay","auto_meter_broken","10x_engineer","spaghetti_code",
+        "merge_conflict","npm_install_universe","docker_whale","ping_999ms","buffering...",
+        "touch_grass","no_cap_fr","skill_issue","yeet!","stonks_only_up","big_brain_time",
+        "sheesh!","rubber_duck","stack_overflow","semicolon;","NaN_bananas","async_await",
+        "kube_pod_crash","ramen_profitable","seed_round_$2M","tab_vs_spaces","vim_exit_:q!",
+        "regex_wizard","off_by_1","99.9%_uptime","zero_bloat_lol","crispy_dosa",
+        "monsoon_traffic","ups_beeping","standup_at_11","jira_ticket_#420","hotfix_v2.9"
+      ];
+
+      /* ======================================================================
+         2. WEB AUDIO API SYNTHESIZER (POP / ARCADE / MUTE)
+         ====================================================================== */
+      class ArcadeAudio {
+        constructor() {
+          this.modes = ['pop', 'arcade', 'mute'];
+          const saved = localStorage.getItem('tslol_sfx');
+          this.idx = this.modes.includes(saved) ? this.modes.indexOf(saved) : 0;
+          this.ctx = null;
+        }
+
+        get current() {
+          return this.modes[this.idx];
+        }
+
+        cycle() {
+          this.idx = (this.idx + 1) % this.modes.length;
+          localStorage.setItem('tslol_sfx', this.current);
+          if (this.current !== 'mute') this.tick(true, false, 1);
+          return this.current;
+        }
+
+        wake() {
+          if (!this.ctx) {
+            const AC = window.AudioContext || window.webkitAudioContext;
+            if (AC) this.ctx = new AC();
+          }
+          if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
+        }
+
+        tick(ok = true, wordDone = false, tier = 1) {
+          if (this.current === 'mute') return;
+          this.wake();
+          if (!this.ctx) return;
+
+          const now = this.ctx.currentTime;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          if (this.current === 'pop') {
+            osc.type = ok ? 'sine' : 'sawtooth';
+            const freq = ok
+              ? (wordDone ? 350 + tier * 40 : 250 + Math.random() * 35)
+              : 115;
+            osc.frequency.setValueAtTime(freq, now);
+            osc.frequency.exponentialRampToValueAtTime(ok ? 65 : 55, now + 0.05);
+            gain.gain.setValueAtTime(0.16, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.055);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.06);
+          } else {
+            osc.type = ok ? 'square' : 'sawtooth';
+            const freq = ok ? (wordDone ? 490 + tier * 75 : 370 + tier * 20) : 130;
+            osc.frequency.setValueAtTime(freq, now);
+            if (wordDone && ok) {
+              osc.frequency.setValueAtTime(freq * 1.25, now + 0.028);
+            }
+            gain.gain.setValueAtTime(0.08, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.075);
+          }
+        }
+
+        celebrate() {
+          if (this.current === 'mute') return;
+          this.wake();
+          if (!this.ctx) return;
+          [523.25, 659.25, 783.99, 1046.5].forEach((freq, i) => {
+            const now = this.ctx.currentTime + i * 0.065;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = this.current === 'arcade' ? 'square' : 'triangle';
+            osc.frequency.setValueAtTime(freq, now);
+            gain.gain.setValueAtTime(0.1, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.16);
+          });
+        }
+      }
+
+      const audio = new ArcadeAudio();
+
+      /* ======================================================================
+         3. CANVAS CONFETTI BURST ON NEW PERSONAL BEST
+         ====================================================================== */
+      function launchConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const palette = ['#FFE600', '#7C3AED', '#FF4D36', '#16A34A', '#121212'];
+        const pieces = Array.from({ length: 90 }, () => ({
+          x: canvas.width * 0.5 + (Math.random() - 0.5) * 160,
+          y: canvas.height * 0.42,
+          vx: (Math.random() - 0.5) * 15,
+          vy: -Math.random() * 13 - 4,
+          w: Math.random() * 8 + 5,
+          h: Math.random() * 5 + 4,
+          color: palette[Math.floor(Math.random() * palette.length)],
+          rot: Math.random() * Math.PI * 2,
+          vrot: (Math.random() - 0.5) * 0.24
+        }));
+
+        let frame = 0;
+        function step() {
+          frame++;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          pieces.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.46;
+            p.vx *= 0.985;
+            p.rot += p.vrot;
+
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.color;
+            ctx.strokeStyle = '#121212';
+            ctx.lineWidth = 1.4;
+            ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.strokeRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            ctx.restore();
+          });
+          if (frame < 105) {
+            requestAnimationFrame(step);
+          } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      /* ======================================================================
+         4. STATE & DOM REFERENCES
+         ====================================================================== */
+      const state = {
+        mode: 'sprint',     // 'sprint' | 'sudden' | 'chaos' | 'zen'
+        sprintSec: 30,      // 15 | 30 | 60
+        status: 'idle',     // 'idle' | 'running' | 'finished'
+
+        words: [],
+        wordIdx: 0,
+        typed: '',
+
+        startTime: null,
+        timerId: null,
+        paceId: null,
+        timeLeft: 30,
+
+        correctChars: 0,
+        allTypedChars: 0,
+        correctKeys: 0,
+        totalKeys: 0,
+
+        streak: 0,
+        maxStreak: 0,
+        wordMarks: [],
+        peakBurstWpm: 0,
+        wpmHistory: [],
+
+        lastWordAt: null,
+        paceFloorMs: 3600,
+        glideOffset: 0,
+        typedHistory: {},
+        paceAnnounced: false,
+        deathReason: '',
+        shareText: '',
+        adRequested: false
+      };
+
+      const $ = (id) => document.getElementById(id);
+      const els = {
+        sprintDurations: $('sprint-durations'),
+        sfxBtn: $('sfx-btn'),
+        sfxIcon: $('sfx-icon'),
+        sfxLabel: $('sfx-label'),
+        topPbBadge: $('top-pb-badge'),
+        playView: $('play-view'),
+        receiptView: $('receipt-view'),
+        focusCard: $('focus-card'),
+        hiddenInput: $('hidden-input'),
+        topProgressFill: $('top-progress-fill'),
+        hudPrimary: $('hud-primary'),
+        hudPrimaryUnit: $('hud-primary-unit'),
+        hudWpm: $('hud-wpm'),
+        paceDelta: $('pace-delta'),
+        flowPill: $('flow-pill'),
+        trainTrack: $('train-track'),
+        startHint: $('start-hint'),
+        hintText: $('hint-text'),
+        // Receipt & AdSense
+        recSubtitle: $('rec-subtitle'),
+        recRank: $('rec-rank'),
+        recPbTag: $('rec-pb-tag'),
+        recWpm: $('rec-wpm'),
+        recAcc: $('rec-acc'),
+        recPeak: $('rec-peak'),
+        recStreak: $('rec-streak'),
+        recRaw: $('rec-raw'),
+        sparklineSvg: $('sparkline-svg'),
+        playAgainBtn: $('play-again-btn'),
+        copyReceiptBtn: $('copy-receipt-btn'),
+        // Modals & Consent
+        legalModal: $('legal-modal'),
+        modalTitle: $('modal-title'),
+        modalBody: $('modal-body'),
+        modalCloseBtn: $('modal-close-btn'),
+        consentBanner: $('consent-banner'),
+        toast: $('toast')
+      };
+
+      /* ======================================================================
+         5. WORD STREAM GENERATION & CONTINUOUS TRAIN-TRACK RENDERING
+         ====================================================================== */
+      function generateWords(count) {
+        const pool = state.mode === 'chaos' ? CHAOS_WORDS : COMMON_WORDS;
+        const list = [];
+        let last = state.words[state.words.length - 1] || '';
+        for (let i = 0; i < count; i++) {
+          let candidate = pool[Math.floor(Math.random() * pool.length)];
+          if (candidate === last) {
+            candidate = pool[(pool.indexOf(candidate) + 1) % pool.length];
+          }
+          last = candidate;
+          list.push(candidate);
+        }
+        return list;
+      }
+
+      function escapeHtml(str) {
+        return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      }
+
+      // Every word (past, active, upcoming) is built from identical .ch cells, including a
+      // trailing space cell, so a word's width never changes when it becomes active or finished.
+      function buildWordInnerHtml(word, typed, isActive, ghostChars) {
+        let html = '';
+        for (let i = 0; i < word.length; i++) {
+          let cls = 'ch';
+          if (i < typed.length) {
+            cls += typed[i] === word[i] ? ' typed-ok' : ' typed-err';
+          } else if (isActive && i === typed.length) {
+            cls += ' current';
+          }
+          html += `<span class="${cls}">${escapeHtml(word[i])}</span>`;
+        }
+
+        if (typed.length > word.length) {
+          const overflow = typed.slice(word.length, word.length + 8);
+          for (let j = 0; j < overflow.length; j++) {
+            html += `<span class="ch typed-extra">${escapeHtml(overflow[j])}</span>`;
+          }
+        }
+
+        // Extra chars that were just backspaced away: collapse smoothly instead of vanishing
+        if (ghostChars) {
+          for (let g = 0; g < ghostChars.length; g++) {
+            html += `<span class="ch typed-extra ghost">${escapeHtml(ghostChars[g])}</span>`;
+          }
+        }
+
+        // The space after the word. When the whole word (plus any extras) has been typed,
+        // the caret simply sits on it, exactly like it sits on a letter.
+        const onSpace = isActive && typed.length >= word.length;
+        html += `<span class="ch sp${onSpace ? ' current' : ''}">&nbsp;</span>`;
+        return html;
+      }
+
+      function slotClassFor(idx) {
+        if (idx === state.wordIdx) return 'word-slot active';
+        if (idx === state.wordIdx - 1) return 'word-slot prev-one';
+        if (idx < state.wordIdx - 1) return 'word-slot passed-far';
+        if (idx === state.wordIdx + 1) return 'word-slot next-up';
+        return 'word-slot';
+      }
+
+      function slotInnerHtml(idx, ghostChars) {
+        const word = state.words[idx] || '';
+        if (idx === state.wordIdx) return buildWordInnerHtml(word, state.typed, true, ghostChars);
+        if (idx < state.wordIdx) return buildWordInnerHtml(word, state.typedHistory[idx] || '', false);
+        return buildWordInnerHtml(word, '', false);
+      }
+
+      const lastRender = { idx: -1, typed: '' };
+
+      function readTrackX() {
+        return new DOMMatrixReadOnly(getComputedStyle(els.trainTrack).transform).m41;
+      }
+
+      function renderTrainTrack(instant = false) {
+        const track = els.trainTrack;
+        const startIdx = Math.max(0, state.wordIdx - 4);
+        const endIdx = state.wordIdx + 8;
+
+        // Fixed caret anchor position
+        const streamWidth = $('baseline-stream').getBoundingClientRect().width || 760;
+        const fixedAnchorX = Math.max(110, Math.min(streamWidth * 0.25, 220));
+        $('fixed-cursor-anchor').style.left = `${fixedAnchorX.toFixed(1)}px`;
+
+        const rebuild = instant || !track.firstElementChild;
+        let currentX = rebuild ? 0 : readTrackX();
+        let newGrow = false;
+        let ghostChars = '';
+        let shifted = false;
+
+        if (rebuild) {
+          let html = '';
+          for (let idx = startIdx; idx < endIdx; idx++) {
+            html += `<span class="${slotClassFor(idx)}" data-idx="${idx}">${slotInnerHtml(idx)}</span>`;
+          }
+          track.innerHTML = html;
+        } else {
+          // 1) Drop words that scrolled off the left, compensating the track so nothing visually shifts
+          const first = track.firstElementChild;
+          if (first && parseInt(first.dataset.idx, 10) < startIdx) {
+            const ref = track.querySelector(`.word-slot[data-idx="${startIdx}"]`);
+            const before = ref ? ref.getBoundingClientRect().left : 0;
+            while (track.firstElementChild && parseInt(track.firstElementChild.dataset.idx, 10) < startIdx) {
+              track.removeChild(track.firstElementChild);
+            }
+            if (ref) {
+              currentX += before - ref.getBoundingClientRect().left;
+              shifted = true;
+            }
+          }
+
+          // 1b) Moving backwards: bring back words on the left, again keeping everything still
+          const head = track.firstElementChild;
+          const headIdx = head ? parseInt(head.dataset.idx, 10) : startIdx;
+          if (head && headIdx > startIdx) {
+            const before = head.getBoundingClientRect().left;
+            let lead = '';
+            for (let idx = startIdx; idx < headIdx; idx++) {
+              lead += `<span class="${slotClassFor(idx)}" data-idx="${idx}">${slotInnerHtml(idx)}</span>`;
+            }
+            track.insertAdjacentHTML('afterbegin', lead);
+            currentX += before - head.getBoundingClientRect().left;
+            shifted = true;
+          }
+
+          // 2) Append upcoming words on the right (no effect on anything to their left)
+          let lastIdx = track.lastElementChild ? parseInt(track.lastElementChild.dataset.idx, 10) : startIdx - 1;
+          let tail = '';
+          for (let idx = lastIdx + 1; idx < endIdx; idx++) {
+            tail += `<span class="${slotClassFor(idx)}" data-idx="${idx}">${slotInnerHtml(idx)}</span>`;
+          }
+          if (tail) track.insertAdjacentHTML('beforeend', tail);
+
+          // 3) Update classes in place; re-render only the words whose content can change
+          const sameWord = lastRender.idx === state.wordIdx;
+          if (sameWord) {
+            const word = state.words[state.wordIdx] || '';
+            if (state.typed.length > word.length && state.typed.length > lastRender.typed.length) {
+              newGrow = true;
+            } else if (lastRender.typed.length > word.length && state.typed.length < lastRender.typed.length) {
+              ghostChars = lastRender.typed.slice(Math.max(state.typed.length, word.length), word.length + 8);
+            }
+          }
+          track.querySelectorAll('.word-slot').forEach((el) => {
+            const idx = parseInt(el.dataset.idx, 10);
+            const cls = slotClassFor(idx);
+            if (el.className !== cls) el.className = cls;
+            if (idx === state.wordIdx) {
+              el.innerHTML = slotInnerHtml(idx, ghostChars);
+            } else if (!sameWord && Math.abs(idx - state.wordIdx) === 1) {
+              el.innerHTML = slotInnerHtml(idx);
+            }
+          });
+
+          // Keep the already-visible content still while we re-anchor (only needed if words were dropped)
+          if (shifted) {
+            track.classList.add('no-transition');
+            track.style.transform = `translate3d(${currentX.toFixed(2)}px, 0px, 0px)`;
+            void track.offsetWidth;
+            track.classList.remove('no-transition');
+          }
+        }
+
+        // Measure the caret cell in FINAL layout (animated extras are not flagged yet),
+        // relative to the track so the result is independent of any in-flight transform.
+        const activeSlot = track.querySelector(`.word-slot[data-idx="${state.wordIdx}"]`);
+        const caretEl = activeSlot && activeSlot.querySelector('.ch.current');
+        let targetX = fixedAnchorX - 18;
+        if (caretEl) {
+          const trackLeft = track.getBoundingClientRect().left;
+          const r = caretEl.getBoundingClientRect();
+          targetX = fixedAnchorX - ((r.left - trackLeft) + r.width / 2);
+
+          // Make the cursor exactly the size/position of the character cell (no more sub-pixel drift)
+          const anchor = $('fixed-cursor-anchor');
+          const streamTop = $('baseline-stream').getBoundingClientRect().top;
+          anchor.style.width = `${r.width.toFixed(2)}px`;
+          anchor.style.height = `${r.height.toFixed(2)}px`;
+          anchor.style.top = `${(r.top - streamTop).toFixed(2)}px`;
+        }
+
+        if (instant || rebuild) {
+          track.classList.add('no-transition');
+          track.style.transform = `translate3d(${targetX.toFixed(2)}px, 0px, 0px)`;
+          void track.offsetWidth;
+          track.classList.remove('no-transition');
+        } else {
+          // Start the width animations and the glide in the same frame so they stay in sync
+          if (newGrow && activeSlot) {
+            const extras = activeSlot.querySelectorAll('.ch.typed-extra:not(.ghost)');
+            if (extras.length) extras[extras.length - 1].classList.add('grow');
+          }
+          if (ghostChars && activeSlot) {
+            activeSlot.querySelectorAll('.ch.ghost').forEach((g) => g.classList.add('run'));
+          }
+          track.style.transform = `translate3d(${targetX.toFixed(2)}px, 0px, 0px)`;
+        }
+
+        lastRender.idx = state.wordIdx;
+        lastRender.typed = state.typed;
+      }
+
+      /* ======================================================================
+         6. FLOW MULTIPLIER & PB HELPERS
+         ====================================================================== */
+      function getFlowState() {
+        if (state.streak >= 25) return { tier: 4, label: 'OVERDRIVE 🔥' };
+        if (state.streak >= 14) return { tier: 3, label: '3x FLOW' };
+        if (state.streak >= 6) return { tier: 2, label: '2x FLOW' };
+        return { tier: 1, label: '1x FLOW' };
+      }
+
+      function updateFlowUI() {
+        const { tier, label } = getFlowState();
+        els.flowPill.textContent = label;
+        els.flowPill.className = `flow-pill${tier > 1 ? ` tier-${tier}` : ''}`;
+        els.focusCard.classList.toggle('overdrive', tier >= 3);
+      }
+
+      function getPbStorageKey() {
+        return (state.mode === 'sprint' || state.mode === 'zen')
+          ? `tslol_pb_${state.mode}_${state.sprintSec}`
+          : `tslol_pb_${state.mode}`;
+      }
+
+      function getPb() {
+        return parseInt(localStorage.getItem(getPbStorageKey()) || '0', 10);
+      }
+
+      function refreshTopPbBadge() {
+        const pb = getPb();
+        if (pb <= 0) {
+          els.topPbBadge.textContent = '🏆 PB: --';
+        } else if (state.mode === 'sudden') {
+          els.topPbBadge.textContent = `🏆 PB: ${pb}w`;
+        } else {
+          els.topPbBadge.textContent = `🏆 PB: ${pb}`;
+        }
+      }
+
+      function triggerMicroShake() {
+        els.focusCard.classList.remove('shake');
+        void els.focusCard.offsetWidth;
+        els.focusCard.classList.add('shake');
+      }
+
+      /* ======================================================================
+         7. ACCURATE WPM & TELEMETRY
+         ====================================================================== */
+      function calculateStats() {
+        let elapsedMs = state.startTime ? Math.max(200, performance.now() - state.startTime) : 0;
+        if (state.mode === 'sprint' || state.mode === 'zen') elapsedMs = Math.min(elapsedMs, state.sprintSec * 1000);
+        const mins = elapsedMs / 60000;
+
+        const target = state.words[state.wordIdx] || '';
+        let prefixMatches = 0;
+        for (let i = 0; i < Math.min(target.length, state.typed.length); i++) {
+          if (state.typed[i] === target[i]) prefixMatches++;
+        }
+
+        const totalNetChars = state.correctChars + prefixMatches;
+        const totalRawChars = state.allTypedChars + state.typed.length;
+
+        const netWpm = mins > 0 ? Math.round((totalNetChars / 5) / mins) : 0;
+        const rawWpm = mins > 0 ? Math.round((totalRawChars / 5) / mins) : 0;
+        const acc = state.totalKeys > 0
+          ? Math.round((state.correctKeys / state.totalKeys) * 100)
+          : 100;
+
+        return {
+          netWpm: Math.max(0, netWpm),
+          rawWpm: Math.max(0, rawWpm),
+          acc: Math.min(100, Math.max(0, acc)),
+          elapsedSec: elapsedMs / 1000
+        };
+      }
+
+      function updateHud() {
+        const stats = calculateStats();
+        els.hudWpm.textContent = stats.netWpm;
+
+        const pb = getPb();
+        if (state.mode === 'sprint' || state.mode === 'zen') {
+          els.hudPrimary.textContent = `${Math.max(0, state.timeLeft)}s`;
+          els.hudPrimaryUnit.textContent = 'left';
+
+          const pct = (Math.max(0, state.timeLeft) / state.sprintSec) * 100;
+          els.topProgressFill.style.width = `${pct}%`;
+          els.topProgressFill.className = `top-progress-fill${state.timeLeft <= 5 ? ' danger' : ''}`;
+
+          if (pb > 0 && state.status === 'running' && stats.elapsedSec >= 2) {
+            const diff = stats.netWpm - pb;
+            els.paceDelta.style.display = 'inline-block';
+            els.paceDelta.textContent = diff >= 0 ? `+${diff} vs PB` : `${diff} vs PB`;
+            els.paceDelta.className = `pace-delta ${diff >= 0 ? 'ahead' : 'behind'}`;
+          } else {
+            els.paceDelta.style.display = 'none';
+          }
+        } else if (state.mode === 'sudden') {
+          els.hudPrimary.textContent = state.wordIdx;
+          els.hudPrimaryUnit.textContent = 'words';
+          els.paceDelta.style.display = 'none';
+          if (state.wordIdx < 3) {
+            els.topProgressFill.style.width = '100%';
+            els.topProgressFill.className = 'top-progress-fill violet';
+          }
+        } else {
+          // Chaos .lol (25 words)
+          els.hudPrimary.textContent = `${Math.min(25, state.wordIdx)}/25`;
+          els.hudPrimaryUnit.textContent = 'words';
+          els.paceDelta.style.display = 'none';
+          const pct = (Math.min(25, state.wordIdx) / 25) * 100;
+          els.topProgressFill.style.width = `${pct}%`;
+          els.topProgressFill.className = 'top-progress-fill violet';
+        }
+      }
+
+      /* ======================================================================
+         8. RUN LIFECYCLE
+         ====================================================================== */
+      // Pace limit per word: starts generous (6s) and tightens by 0.2s per word down to the
+      // original 3.6s floor, so a new player gets a warm-up instead of an instant squeeze.
+      function paceFloorFor(wordIdx) {
+        return Math.max(state.paceFloorMs, 6000 - wordIdx * 200);
+      }
+
+      // Backspace on an empty word re-opens the previous word, but only if it was typed wrong
+      // (a correct word has nothing to fix). Undoes that word's contribution to the stats so
+      // retyping it doesn't double count.
+      function reopenPreviousWord() {
+        if (state.status !== 'running') return false;
+        const prevIdx = state.wordIdx - 1;
+        if (prevIdx < 0) return false;
+        const prevTyped = state.typedHistory[prevIdx];
+        const prevWord = state.words[prevIdx];
+        if (prevTyped === undefined || prevTyped === prevWord) return false;
+
+        let matches = 0;
+        for (let i = 0; i < Math.min(prevWord.length, prevTyped.length); i++) {
+          if (prevTyped[i] === prevWord[i]) matches++;
+        }
+        state.correctChars = Math.max(0, state.correctChars - matches);
+        state.totalKeys = Math.max(0, state.totalKeys - 1);
+        state.allTypedChars = Math.max(0, state.allTypedChars - (prevTyped.length + 1));
+        if (state.wordMarks.length > 1) state.wordMarks.pop();
+
+        delete state.typedHistory[prevIdx];
+        state.wordIdx = prevIdx;
+        state.typed = prevTyped;
+        els.hiddenInput.value = prevTyped;
+        return true;
+      }
+
+      function beginRun() {
+        if (state.status !== 'idle') return;
+        state.status = 'running';
+        state.startTime = performance.now();
+        state.lastWordAt = state.startTime;
+        state.wordMarks = [{ t: state.startTime, chars: 0 }];
+        els.startHint.classList.add('hidden');
+
+        // Time is always derived from performance.now(), never from counting ticks, so a throttled
+        // background tab or a late tick can't stretch a run past its limit.
+        let secCount = 0;
+        const limited = state.mode === 'sprint' || state.mode === 'zen';
+        state.timerId = setInterval(() => {
+          const elapsedMs = performance.now() - state.startTime;
+
+          if (limited && elapsedMs >= state.sprintSec * 1000) {
+            state.timeLeft = 0;
+            updateHud();
+            endRun();
+            return;
+          }
+
+          const wholeSec = Math.floor(elapsedMs / 1000);
+          if (wholeSec > secCount) {
+            while (secCount < wholeSec) {
+              secCount++;
+              const st = calculateStats();
+              state.wpmHistory.push({ sec: secCount, wpm: st.netWpm, raw: st.rawWpm });
+            }
+            if (limited) state.timeLeft = state.sprintSec - wholeSec;
+            updateHud();
+          }
+        }, 200);
+
+        if (state.mode === 'sudden') {
+          state.paceId = setInterval(() => {
+            if (state.status !== 'running' || state.wordIdx < 3) return;
+            if (!state.paceAnnounced) {
+              state.paceAnnounced = true;
+              showToast('⏱ PACE TIMER ON');
+            }
+            const floorMs = paceFloorFor(state.wordIdx);
+            const idleMs = performance.now() - state.lastWordAt;
+            const leftMs = Math.max(0, floorMs - idleMs);
+            const pct = (leftMs / floorMs) * 100;
+            els.topProgressFill.style.width = `${pct}%`;
+            els.topProgressFill.className = `top-progress-fill${pct < 35 ? ' danger' : ' violet'}`;
+
+            if (leftMs <= 0) {
+              state.deathReason = 'TOO SLOW! FELL BELOW PACE';
+              endRun();
+            }
+          }, 50);
+        }
+      }
+
+      function endRun() {
+        if (state.status === 'finished') return;
+        state.status = 'finished';
+
+        clearInterval(state.timerId);
+        clearInterval(state.paceId);
+
+        const finalStats = calculateStats();
+        if (state.wpmHistory.length === 0) {
+          state.wpmHistory.push({ sec: 1, wpm: finalStats.netWpm, raw: finalStats.rawWpm });
+        } else {
+          state.wpmHistory.push({
+            sec: state.wpmHistory.length + 1,
+            wpm: finalStats.netWpm,
+            raw: finalStats.rawWpm
+          });
+        }
+
+        renderReceipt(finalStats);
+      }
+
+      function resetRun() {
+        clearInterval(state.timerId);
+        clearInterval(state.paceId);
+
+        document.documentElement.classList.toggle('zen-dark', state.mode === 'zen');
+        document.body.classList.toggle('zen-dark', state.mode === 'zen');
+
+        state.status = 'idle';
+        state.words = generateWords(80);
+        state.wordIdx = 0;
+        state.typed = '';
+        state.startTime = null;
+        state.timeLeft = state.sprintSec;
+
+        state.correctChars = 0;
+        state.allTypedChars = 0;
+        state.correctKeys = 0;
+        state.totalKeys = 0;
+
+        state.streak = 0;
+        state.maxStreak = 0;
+        state.wordMarks = [];
+        state.peakBurstWpm = 0;
+        state.wpmHistory = [];
+        state.lastWordAt = null;
+        state.glideOffset = 0;
+        state.typedHistory = {};
+        state.paceAnnounced = false;
+        state.deathReason = '';
+
+        els.hiddenInput.value = '';
+        els.startHint.classList.remove('hidden');
+        els.focusCard.classList.remove('overdrive', 'shake');
+
+        if (state.mode === 'sprint' || state.mode === 'zen') {
+          els.hintText.textContent = state.mode === 'zen'
+            ? 'zen dark mode · hover controls to illuminate'
+            : 'start typing... space to advance';
+          els.topProgressFill.style.width = '100%';
+          els.topProgressFill.className = 'top-progress-fill';
+        } else if (state.mode === 'sudden') {
+          els.hintText.textContent = 'one typo ends the run · pace timer starts after word 3';
+          els.topProgressFill.style.width = '100%';
+          els.topProgressFill.className = 'top-progress-fill violet';
+        } else {
+          els.hintText.textContent = '25 chaotic dev & Indian tech words';
+          els.topProgressFill.style.width = '0%';
+          els.topProgressFill.className = 'top-progress-fill violet';
+        }
+
+        els.receiptView.classList.remove('visible');
+        els.playView.style.display = 'flex';
+
+        refreshTopPbBadge();
+        renderTrainTrack(true);
+        updateFlowUI();
+        updateHud();
+        focusTypingCard();
+      }
+
+      /* ======================================================================
+         9. KEYBOARD INPUT ENGINE
+         ====================================================================== */
+      function onKeyDown(e) {
+        if (els.legalModal.classList.contains('open')) {
+          if (e.key === 'Escape') {
+            e.preventDefault();
+            closeLegalModal();
+          }
+          return;
+        }
+
+        if (e.key === 'Tab' || e.key === 'Escape') {
+          e.preventDefault();
+          resetRun();
+          return;
+        }
+
+        if (state.status === 'finished') {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            resetRun();
+          }
+          return;
+        }
+
+        if (state.status === 'running' && (state.mode === 'sprint' || state.mode === 'zen') &&
+            performance.now() - state.startTime >= state.sprintSec * 1000) {
+          e.preventDefault();
+          state.timeLeft = 0;
+          updateHud();
+          endRun();
+          return;
+        }
+
+        if (document.activeElement !== els.hiddenInput) {
+          focusTypingCard();
+        }
+
+        // Ctrl/Alt/Meta + Backspace -> clear entire current word
+        if (e.key === 'Backspace' && (e.ctrlKey || e.altKey || e.metaKey)) {
+          e.preventDefault();
+          if (state.typed.length > 0) {
+            const CHAR_STEP = 12;
+            state.glideOffset = Math.max(0, state.glideOffset - state.typed.length * CHAR_STEP);
+            state.typed = '';
+            els.hiddenInput.value = '';
+            audio.tick(true, false, 1);
+            renderTrainTrack(false);
+            updateHud();
+          } else if (reopenPreviousWord()) {
+            state.typed = '';
+            els.hiddenInput.value = '';
+            audio.tick(true, false, 1);
+            renderTrainTrack(false);
+            updateHud();
+          }
+          return;
+        }
+
+        // Single Backspace
+        if (e.key === 'Backspace') {
+          e.preventDefault();
+          if (state.typed.length > 0) {
+            const CHAR_STEP = 12;
+            state.glideOffset = Math.max(0, state.glideOffset - CHAR_STEP);
+            state.typed = state.typed.slice(0, -1);
+            els.hiddenInput.value = state.typed;
+            audio.tick(true, false, 1);
+            renderTrainTrack(false);
+            updateHud();
+          } else if (reopenPreviousWord()) {
+            audio.tick(true, false, 1);
+            renderTrainTrack(false);
+            updateHud();
+          }
+          return;
+        }
+
+        // Spacebar -> advance word smoothly along the train track
+        if (e.key === ' ') {
+          e.preventDefault();
+          if (state.typed.length === 0) return;
+          if (state.status === 'idle') beginRun();
+
+          const target = state.words[state.wordIdx];
+          const exact = state.typed === target;
+
+          if (state.mode === 'sudden' && !exact) {
+            audio.tick(false, false, 1);
+            triggerMicroShake();
+            state.deathReason = `TYPO ON "${target.toUpperCase()}"`;
+            endRun();
+            return;
+          }
+
+          state.totalKeys++;
+          state.allTypedChars += state.typed.length + 1;
+
+          if (exact) {
+            state.correctKeys++;
+            state.correctChars += target.length + 1;
+            state.streak++;
+            state.maxStreak = Math.max(state.maxStreak, state.streak);
+          } else {
+            for (let i = 0; i < Math.min(target.length, state.typed.length); i++) {
+              if (state.typed[i] === target[i]) state.correctChars++;
+            }
+            state.streak = 0;
+            triggerMicroShake();
+          }
+
+          const tier = getFlowState().tier;
+          audio.tick(exact, true, tier);
+
+          // Rolling 5-word burst speed
+          const now = performance.now();
+          state.lastWordAt = now;
+          state.wordMarks.push({ t: now, chars: state.correctChars });
+          if (state.wordMarks.length >= 6) {
+            const prev = state.wordMarks[state.wordMarks.length - 6];
+            const mins = (now - prev.t) / 60000;
+            const chars = state.correctChars - prev.chars;
+            if (mins > 0.005) {
+              const burst = Math.round((chars / 5) / mins);
+              if (burst > state.peakBurstWpm && burst < 340) {
+                state.peakBurstWpm = burst;
+              }
+            }
+          }
+
+          const CHAR_STEP = 12;
+          state.glideOffset += CHAR_STEP;
+          state.typedHistory[state.wordIdx] = state.typed;
+          state.wordIdx++;
+          state.typed = '';
+          els.hiddenInput.value = '';
+
+          if (state.words.length - state.wordIdx < 15) {
+            state.words.push(...generateWords(50));
+          }
+
+          if (state.mode === 'chaos' && state.wordIdx >= 25) {
+            updateHud();
+            endRun();
+            return;
+          }
+
+          renderTrainTrack(false);
+          updateFlowUI();
+          updateHud();
+          return;
+        }
+
+        // Single printable character
+        if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          e.preventDefault();
+          if (state.status === 'idle') beginRun();
+
+          const target = state.words[state.wordIdx];
+          if (state.typed.length >= target.length + 8) return;
+
+          const pos = state.typed.length;
+          const isMatch = pos < target.length && target[pos] === e.key;
+
+          if (state.mode === 'sudden' && !isMatch) {
+            const CHAR_STEP = 12;
+            state.glideOffset += CHAR_STEP;
+            state.typed += e.key;
+            renderTrainTrack(false);
+            audio.tick(false, false, 1);
+            triggerMicroShake();
+            state.deathReason = `MISSED "${target[pos] || 'END'}" IN "${target.toUpperCase()}"`;
+            setTimeout(() => endRun(), 130);
+            return;
+          }
+
+          const CHAR_STEP = 12;
+          state.glideOffset += CHAR_STEP;
+          state.typed += e.key;
+          els.hiddenInput.value = state.typed;
+          state.totalKeys++;
+
+          if (isMatch) {
+            state.correctKeys++;
+          } else {
+            state.streak = 0;
+            triggerMicroShake();
+          }
+
+          audio.tick(isMatch, false, getFlowState().tier);
+          renderTrainTrack(false);
+          updateFlowUI();
+          updateHud();
+
+          // Auto-finish on exact final character of 25th word in Chaos .lol mode
+          if (state.mode === 'chaos' && state.wordIdx === 24 && state.typed === target) {
+            state.correctChars += target.length;
+            state.allTypedChars += target.length;
+            state.wordIdx++;
+            updateHud();
+            endRun();
+          }
+        }
+      }
+
+      /* ======================================================================
+         10. RECEIPT SCORECARD, SPARKLINE & ADSENSE SLOT TRIGGER
+         ====================================================================== */
+      function getRankTitle(wpm, acc) {
+        if (state.mode === 'sudden' && state.deathReason) return `💀 ${state.deathReason}`;
+        if (acc < 78) return '🎲 CHAOTIC BUTTON MASHER';
+        if (wpm < 30) return '🐢 TWO-FINGER PECKER';
+        if (wpm < 50) return '☕ CAFFEINATED INTERN';
+        if (wpm < 75) return '⚡ MECHANICAL SWITCH ENJOYER';
+        if (wpm < 100) return '🔥 KEYBOARD WARLORD';
+        if (wpm < 125) return '🚀 10X PROD DEPLOYER';
+        return '👽 SENTIENT NEURAL LINK';
+      }
+
+      function renderSparkline(points) {
+        const svg = els.sparklineSvg;
+        svg.innerHTML = '';
+        const W = 460, H = 92, pad = 10;
+        const data = points.length < 2 ? [points[0], points[0]] : points;
+        const maxY = Math.max(45, ...data.map((d) => Math.max(d.wpm, d.raw)));
+        const strokeInk = document.body.classList.contains('zen-dark') ? '#E5E7EB' : '#121212';
+
+        const x = (i) => pad + (i / (data.length - 1)) * (W - pad * 2);
+        const y = (v) => H - pad - (v / maxY) * (H - pad * 2);
+
+        const mid = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        mid.setAttribute('x1', pad);
+        mid.setAttribute('x2', W - pad);
+        mid.setAttribute('y1', H / 2);
+        mid.setAttribute('y2', H / 2);
+        mid.setAttribute('stroke', strokeInk);
+        mid.setAttribute('stroke-opacity', '0.18');
+        mid.setAttribute('stroke-dasharray', '4 4');
+        svg.appendChild(mid);
+
+        const rawD = data.map((d, i) => `${i === 0 ? 'M' : 'L'}${x(i).toFixed(1)},${y(d.raw).toFixed(1)}`).join(' ');
+        const rawLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        rawLine.setAttribute('d', rawD);
+        rawLine.setAttribute('fill', 'none');
+        rawLine.setAttribute('stroke', '#64615B');
+        rawLine.setAttribute('stroke-width', '2');
+        rawLine.setAttribute('stroke-dasharray', '4 4');
+        svg.appendChild(rawLine);
+
+        const coords = data.map((d, i) => `${x(i).toFixed(1)},${y(d.wpm).toFixed(1)}`);
+        const fillArea = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        fillArea.setAttribute('d', `M${x(0).toFixed(1)},${H - pad} L${coords.join(' L')} L${x(data.length - 1).toFixed(1)},${H - pad} Z`);
+        fillArea.setAttribute('fill', '#FFE600');
+        fillArea.setAttribute('fill-opacity', document.body.classList.contains('zen-dark') ? '0.28' : '0.65');
+        svg.appendChild(fillArea);
+
+        const netLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        netLine.setAttribute('d', `M${coords.join(' L')}`);
+        netLine.setAttribute('fill', 'none');
+        netLine.setAttribute('stroke', strokeInk);
+        netLine.setAttribute('stroke-width', '3');
+        netLine.setAttribute('stroke-linecap', 'round');
+        netLine.setAttribute('stroke-linejoin', 'round');
+        svg.appendChild(netLine);
+
+        data.forEach((d, i) => {
+          if (data.length > 30 && i % 2 !== 0 && i !== data.length - 1) return;
+          const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          dot.setAttribute('cx', x(i).toFixed(1));
+          dot.setAttribute('cy', y(d.wpm).toFixed(1));
+          dot.setAttribute('r', '3.4');
+          dot.setAttribute('fill', '#7C3AED');
+          dot.setAttribute('stroke', strokeInk);
+          dot.setAttribute('stroke-width', '1.6');
+          svg.appendChild(dot);
+        });
+      }
+
+      function requestResultsAd() {
+        if (state.adRequested) return;
+        const slot = document.querySelector('#adsense-results-container ins.adsbygoogle');
+        if (slot && window.adsbygoogle) {
+          try {
+            (window.adsbygoogle = window.adsbygoogle || []).push({});
+            state.adRequested = true;
+          } catch (err) {
+            // AdSense script not yet active
+          }
+        }
+      }
+
+      function renderReceipt(stats) {
+        els.playView.style.display = 'none';
+        els.receiptView.classList.add('visible');
+
+        const modeLabel = state.mode === 'sprint'
+          ? `SPRINT ${state.sprintSec}S`
+          : state.mode === 'zen'
+            ? `ZEN ${state.sprintSec}S`
+            : state.mode === 'sudden'
+              ? `SUDDEN DEATH (${state.wordIdx} WORDS)`
+              : 'CHAOS .LOL (25 WORDS)';
+
+        const rank = getRankTitle(stats.netWpm, stats.acc);
+        const peakVal = Math.max(stats.netWpm, state.peakBurstWpm);
+
+        els.recSubtitle.textContent = `${modeLabel} · VERIFIED`;
+        els.recRank.textContent = rank;
+        els.recWpm.textContent = stats.netWpm;
+        els.recAcc.textContent = `${stats.acc}%`;
+        els.recPeak.textContent = `${peakVal} WPM`;
+        els.recStreak.textContent = `${state.maxStreak} WORDS`;
+        els.recRaw.textContent = `RAW: ${stats.rawWpm} WPM`;
+
+        const candidateScore = state.mode === 'sudden' ? state.wordIdx : stats.netWpm;
+        const oldPb = getPb();
+        const isRecord = candidateScore > oldPb && candidateScore > 0 && (state.mode === 'sudden' || stats.acc >= 70);
+
+        if (isRecord) {
+          localStorage.setItem(getPbStorageKey(), String(candidateScore));
+          refreshTopPbBadge();
+          els.recPbTag.classList.add('show');
+          audio.celebrate();
+          launchConfetti();
+        } else {
+          els.recPbTag.classList.remove('show');
+        }
+
+        renderSparkline(state.wpmHistory);
+        requestResultsAd();
+
+        state.shareText = [
+          `🧾 TYPINGSPEED.LOL RECEIPT`,
+          `MODE: ${modeLabel}`,
+          `⚡ NET SPEED: ${stats.netWpm} WPM (PEAK: ${peakVal})`,
+          `🎯 ACCURACY: ${stats.acc}% | MAX STREAK: ${state.maxStreak}`,
+          `RANK: ${rank}`,
+          `👉 https://typingspeed.lol`
+        ].join('\n');
+      }
+
+      /* ======================================================================
+         11. ADSENSE COMPLIANCE MODALS & CONSENT MANAGEMENT
+         ====================================================================== */
+      const LEGAL_DOCS = {
+        about: {
+          title: 'About typingspeed.lol',
+          html: `
+            <p><strong>typingspeed.lol</strong> is a fast, browser-based typing speed and accuracy benchmark built for writers, developers, and mechanical keyboard enthusiasts.</p>
+            <h3>Game Modes</h3>
+            <ul>
+              <li><strong>Sprint (15s / 30s / 60s):</strong> Standard timed Net WPM and accuracy test with live personal-best pacing.</li>
+              <li><strong>Sudden Death:</strong> Endless endurance mode where a single typo or hesitation ends the run. The pace timer starts after word 3 and tightens gradually.</li>
+              <li><strong>Chaos .lol:</strong> 25-word developer, terminal, and tech-culture speed sprint.</li>
+              <li><strong>Zen Mode:</strong> Low-glare nocturnal dark theme with dimmed interface chrome that illuminates only when hovered.</li>
+            </ul>
+            <p>All WPM calculations follow the industry-standard 5-characters-per-word formula and run 100% locally in your browser without uploading your keystrokes to any server.</p>
+          `
+        },
+        privacy: {
+          title: 'Privacy Policy',
+          html: `
+            <p><em>Last updated: November 25, 2026</em></p>
+            <p>Your privacy matters. <strong>typingspeed.lol</strong> does not require account registration and does not transmit your keystrokes to any backend server.</p>
+            <h3>1. Local Browser Storage</h3>
+            <p>We use <code>localStorage</code> solely on your device to save your personal best scores, sound profile preference, and cookie consent choice.</p>
+            <h3>2. Google AdSense &amp; Third-Party Cookies</h3>
+            <p>We display advertisements via <strong>Google AdSense</strong> exclusively on the post-run results screen (never over active typing areas). Third-party vendors, including Google, use cookies to serve ads based on your prior visits to this or other websites.</p>
+            <ul>
+              <li>Google&#39;s use of advertising cookies enables it and its partners to serve ads to users based on their visit to typingspeed.lol and/or other sites on the Internet.</li>
+              <li>You may opt out of personalized advertising by visiting <a href="https://myadcenter.google.com/" target="_blank" rel="noopener noreferrer">Google My Ad Center</a> or <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer">www.aboutads.info</a>.</li>
+            </ul>
+            <h3>3. Your Rights (GDPR / CCPA / DPDP)</h3>
+            <p>You can clear all locally stored scores and preferences at any time via your browser&#39;s site data settings or update your ad consent using the <strong>Cookies</strong> link in the footer.</p>
+          `
+        },
+        terms: {
+          title: 'Terms of Use',
+          html: `
+            <p>By using <strong>typingspeed.lol</strong>, you agree to use the service for lawful personal or educational typing practice.</p>
+            <ul>
+              <li>The typing test, rankings, and scorecards are provided "as is" without warranties of any kind.</li>
+              <li>Automated scripts, macros, or bots should not be used to spoof personal best records or interact with advertisements.</li>
+              <li>Advertisements displayed on the results screen are served by Google AdSense and are clearly labeled.</li>
+            </ul>
+          `
+        },
+        contact: {
+          title: 'Contact & Publisher Info',
+          html: `
+            <p>Have feedback, bug reports, word-pack ideas, or advertising inquiries for <strong>typingspeed.lol</strong>?</p>
+            <ul>
+              <li><strong>Publisher:</strong> typingspeed.lol</li>
+              <li><strong>Email:</strong> <a href="mailto:hello@typingspeed.lol">hello@typingspeed.lol</a></li>
+              <li><strong>ads.txt:</strong> Hosted at <code>https://typingspeed.lol/ads.txt</code> for authorized Google AdSense inventory verification.</li>
+            </ul>
+          `
+        }
+      };
+
+      function openLegalModal(docKey) {
+        const doc = LEGAL_DOCS[docKey];
+        if (!doc) return;
+        els.modalTitle.textContent = doc.title;
+        els.modalBody.innerHTML = doc.html;
+        els.legalModal.classList.add('open');
+      }
+
+      function closeLegalModal() {
+        els.legalModal.classList.remove('open');
+        if (state.status !== 'finished') {
+          focusTypingCard();
+        }
+      }
+
+      document.querySelectorAll('[data-modal]').forEach((btn) => {
+        btn.addEventListener('click', () => openLegalModal(btn.dataset.modal));
+      });
+      els.modalCloseBtn.addEventListener('click', closeLegalModal);
+      els.legalModal.addEventListener('click', (e) => {
+        if (e.target === els.legalModal) closeLegalModal();
+      });
+
+      // Consent Banner Initialization
+      function applyConsentChoice(mode) {
+        localStorage.setItem('tslol_consent', mode);
+        window.adsbygoogle = window.adsbygoogle || [];
+        window.adsbygoogle.requestNonPersonalizedAds = mode === 'essential' ? 1 : 0;
+        els.consentBanner.classList.remove('show');
+      }
+
+      const savedConsent = localStorage.getItem('tslol_consent');
+      if (!savedConsent) {
+        els.consentBanner.classList.add('show');
+      } else {
+        applyConsentChoice(savedConsent);
+      }
+
+      $('consent-accept').addEventListener('click', () => {
+        applyConsentChoice('all');
+        showToast('✓ PREFERENCES SAVED');
+      });
+      $('consent-essential').addEventListener('click', () => {
+        applyConsentChoice('essential');
+        showToast('✓ NON-PERSONALIZED ADS SET');
+      });
+      $('manage-cookies-btn').addEventListener('click', () => {
+        els.consentBanner.classList.add('show');
+      });
+
+      /* ======================================================================
+         12. UI BINDINGS & INITIALIZATION
+         ====================================================================== */
+      function showToast(msg) {
+        els.toast.textContent = msg;
+        els.toast.classList.add('show');
+        clearTimeout(showToast._timer);
+        showToast._timer = setTimeout(() => els.toast.classList.remove('show'), 2100);
+      }
+
+      function focusTypingCard() {
+        els.hiddenInput.focus({ preventScroll: true });
+        els.focusCard.classList.remove('unfocused');
+      }
+
+      function updateSfxButton() {
+        const m = audio.current;
+        els.sfxIcon.textContent = m === 'mute' ? '🔇' : m === 'arcade' ? '🕹️' : '🔊';
+        els.sfxLabel.textContent = m.toUpperCase();
+      }
+      updateSfxButton();
+
+      els.sfxBtn.addEventListener('click', () => {
+        audio.cycle();
+        updateSfxButton();
+        focusTypingCard();
+      });
+
+      document.querySelectorAll('.mode-tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.mode-tab').forEach((t) => t.classList.remove('active'));
+          tab.classList.add('active');
+          state.mode = tab.dataset.mode;
+          els.sprintDurations.classList.toggle('hidden', state.mode !== 'sprint' && state.mode !== 'zen');
+          resetRun();
+        });
+      });
+
+      document.querySelectorAll('.dur-pill').forEach((pill) => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.dur-pill').forEach((p) => p.classList.remove('active'));
+          pill.classList.add('active');
+          state.sprintSec = parseInt(pill.dataset.sec, 10);
+          resetRun();
+        });
+      });
+
+      els.playAgainBtn.addEventListener('click', resetRun);
+
+      els.copyReceiptBtn.addEventListener('click', () => {
+        const ta = document.createElement('textarea');
+        ta.value = state.shareText || 'typingspeed.lol';
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+          document.execCommand('copy');
+          showToast('📋 SCORE RECEIPT COPIED!');
+        } catch (err) {
+          showToast('COPY FAILED');
+        }
+        document.body.removeChild(ta);
+      });
+
+      els.focusCard.addEventListener('click', focusTypingCard);
+      els.hiddenInput.addEventListener('blur', () => {
+        if (state.status !== 'finished' && !els.legalModal.classList.contains('open')) {
+          els.focusCard.classList.add('unfocused');
+        }
+      });
+      els.hiddenInput.addEventListener('focus', () => {
+        els.focusCard.classList.remove('unfocused');
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'BUTTON' && (e.key === ' ' || e.key === 'Enter')) return;
+        onKeyDown(e);
+      });
+
+      // Caps Lock warning (keydown + keyup so it also clears when the key is released/toggled off)
+      function syncCapsWarning(e) {
+        if (typeof e.getModifierState !== 'function') return;
+        $('caps-warning').classList.toggle('show', e.getModifierState('CapsLock'));
+      }
+      document.addEventListener('keydown', syncCapsWarning);
+      document.addEventListener('keyup', syncCapsWarning);
+      window.addEventListener('blur', () => $('caps-warning').classList.remove('show'));
+
+      window.addEventListener('resize', () => {
+        if (state.status !== 'finished') {
+          renderTrainTrack(true);
+        }
+      });
+
+      window.addEventListener('load', resetRun);
+    })();
+  </script>
+</body>
+</html>
