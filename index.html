@@ -3,9 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>typingspeed.lol — How fast can you lol?</title>
-  <meta name="description" content="Ultra-lightweight neo-brutalist typing speed arcade for typingspeed.lol. Clean, fast, and fun with Sprint, Sudden Death, Chaos .lol, and Zen modes." />
+  <title>Free Typing Speed Test — Check Your WPM &amp; Accuracy | typingspeed.lol</title>
+  <meta name="description" content="Free online typing speed test. Measure your WPM and accuracy in Sprint, Sudden Death, Chaos and Zen modes. No sign-up. Fast fingers. Zero chill." />
   <meta name="robots" content="index, follow" />
+  <meta name="author" content="Pratik Nilange" />
+  <link rel="canonical" href="https://typingspeed.lol/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="typingspeed.lol" />
+  <meta property="og:title" content="Free Typing Speed Test — Check Your WPM &amp; Accuracy | typingspeed.lol" />
+  <meta property="og:description" content="Free online typing speed test. Measure your WPM and accuracy in Sprint, Sudden Death, Chaos and Zen modes. No sign-up. Fast fingers. Zero chill." />
+  <meta property="og:url" content="https://typingspeed.lol/" />
+  <meta property="og:image" content="https://typingspeed.lol/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:image" content="https://typingspeed.lol/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "typingspeed.lol", "url": "https://typingspeed.lol/", "applicationCategory": "EducationalApplication", "operatingSystem": "Any (web browser)", "description": "Free typing speed test that measures net WPM and accuracy in Sprint, Sudden Death, Chaos and Zen modes.", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "author": {"@type": "Person", "name": "Pratik Nilange", "url": "https://pratiknilange.in"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a good typing speed?", "acceptedAnswer": {"@type": "Answer", "text": "Commonly cited estimates put the average adult at around 40 words per minute on a keyboard. Around 60 WPM is considered above average, and professional typists often exceed 80 WPM."}}, {"@type": "Question", "name": "How is WPM calculated on typingspeed.lol?", "acceptedAnswer": {"@type": "Answer", "text": "Net WPM counts correctly typed characters, divides by five (the standard length of one word), subtracts uncorrected errors, and scales the result to one minute."}}, {"@type": "Question", "name": "Is typingspeed.lol free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The typing test is free to use with no sign-up. Ads appear only on the results screen, never while you type."}}, {"@type": "Question", "name": "Are my keystrokes stored or sent anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Keystrokes are processed in your browser and never uploaded. Only your personal best scores and preferences are saved locally on your device."}}]}</script>
 
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="icon" href="./favicon.ico" sizes="48x48">
@@ -1222,6 +1236,28 @@
       .card-hud { padding: 0.9rem 1.25rem 0; }
       .start-hint { left: 1.25rem; }
     }
+    /* SEO / policy pages additions */
+    .page-title { font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); text-align: center; margin: 0 0 0.75rem; }
+    a.footer-link { text-decoration: none; color: inherit; }
+    .footer-credit { font-family: var(--font-mono); font-size: 0.72rem; color: var(--ink-soft); margin-bottom: 0.4rem; }
+    .footer-credit a { color: inherit; font-weight: 800; }
+    #results-ad-slot { display: flex; }
+    #results-ad-slot:not(.has-ad) { min-height: 0; height: 0; padding: 0; margin: 0; border: 0; overflow: hidden; }
+    .results-layout { display: grid; grid-template-columns: 160px minmax(0, 1fr) 160px; gap: 1rem; align-items: start; width: 100%; }
+    .results-main { min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+    .ad-side { width: 160px; display: flex; flex-direction: column; align-items: center; gap: 0.35rem; position: sticky; top: 1rem; }
+    .ad-side:not(.has-ad) { height: 0; overflow: hidden; }
+    .ad-side.has-ad { border: 2px dashed var(--ink-soft); border-radius: 14px; padding: 0.5rem; background: var(--bg-card); }
+    @media (max-width: 1100px) {
+      .results-layout { grid-template-columns: minmax(0, 1fr); }
+      .ad-side { display: none; }
+    }
+    .seo-article { max-width: 760px; margin: 2.5rem auto 1rem; padding: 0 1.25rem; line-height: 1.65; color: var(--ink); font-family: var(--font-sans); }
+    .seo-article h2 { font-size: 1.35rem; margin: 2rem 0 0.6rem; }
+    .seo-article h3 { font-size: 1.05rem; margin: 1.25rem 0 0.3rem; }
+    .seo-article p, .seo-article li { color: var(--ink-soft); }
+    .seo-article ul { padding-left: 1.25rem; }
+    .seo-article li { margin-bottom: 0.4rem; }
   </style>
 </head>
 <body>
@@ -1258,6 +1294,7 @@
 
   <!-- 2. UNCLUTTERED FOCUS TYPING STAGE -->
   <main id="play-view">
+    <h1 class="page-title">Free Typing Speed Test</h1>
     <section class="focus-card" id="focus-card" aria-label="Typing area">
       <input
         type="text"
@@ -1315,6 +1352,15 @@
 
   <!-- 3. PERFORATED RECEIPT SCORECARD + ADSENSE RESULTS PLACEMENT -->
   <section id="receipt-view" aria-label="Run scorecard receipt">
+    <div class="results-layout">
+    <aside class="ad-side" id="ad-left" aria-label="Advertisement">
+      <span class="ad-disclosure">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block;width:160px;height:600px"
+           data-ad-client="ca-pub-3560973359018353"
+           data-ad-slot="7151859876"></ins>
+    </aside>
+    <div class="results-main">
     <div class="receipt-card">
       <div class="receipt-header">
         <div class="receipt-title">🧾 TYPINGSPEED.LOL RECEIPT</div>
@@ -1358,32 +1404,53 @@
 
     <!-- Dedicated Results-Page AdSense Unit (Only rendered on completed results screen) -->
     <aside class="ad-slot-card" id="results-ad-slot" aria-label="Advertisement">
-      <span class="ad-disclosure">Advertisement</span>
-      <div class="ad-slot-inner" id="adsense-results-container">
-        <!--
-          Replace data-ad-client and data-ad-slot with your live AdSense unit IDs:
+        <span class="ad-disclosure">Advertisement</span>
+        <div class="ad-slot-inner" id="adsense-results-container">
           <ins class="adsbygoogle"
-               style="display:block;width:100%;max-width:728px;height:90px"
-               data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-               data-ad-slot="YYYYYYYYYY"
-               data-ad-format="horizontal"
+               style="display:block;width:100%;min-height:90px"
+               data-ad-client="ca-pub-3560973359018353"
+               data-ad-slot="1305683004"
+               data-ad-format="auto"
                data-full-width-responsive="true"></ins>
-        -->
-        <span style="font-family:var(--font-mono);font-size:0.74rem;color:var(--ink-soft);">
-          AdSense Results Banner Slot (728&times;90 Responsive)
-        </span>
-      </div>
+        </div>
+      </aside>
+    </div>
+    <aside class="ad-side" id="ad-right" aria-label="Advertisement">
+      <span class="ad-disclosure">Advertisement</span>
+      <ins class="adsbygoogle"
+           style="display:block;width:160px;height:600px"
+           data-ad-client="ca-pub-3560973359018353"
+           data-ad-slot="7403141311"></ins>
     </aside>
+    </div>
+  </section>
+
+  <section class="seo-article" aria-labelledby="seo-h2">
+    <h2 id="seo-h2">Free typing speed test: how fast can you type?</h2>
+    <p>typingspeed.lol is a free typing speed test that measures your words per minute (WPM) and accuracy in your browser. Nothing to install and no sign-up. Pick a mode, start typing, and get a score receipt with your net WPM, accuracy, peak burst and longest streak.</p>
+
+    <h2>How WPM and accuracy are measured</h2>
+    <p>Words per minute uses the standard convention of five characters per word. Net WPM counts only correctly typed characters and subtracts the penalty for uncorrected errors. Raw WPM counts every keystroke, including mistakes. Accuracy is the share of your keystrokes that were correct.</p>
+
+    <h2>Game modes</h2>
+    <ul><li><strong>Sprint:</strong> a timed test of 15, 30 or 60 seconds for a clean WPM score.</li><li><strong>Sudden Death:</strong> one typo ends the run. The pace timer starts after word 3 and tightens gradually.</li><li><strong>Chaos .lol:</strong> 25 words from developer, terminal and tech-culture vocabulary.</li><li><strong>Zen Mode:</strong> a low-glare dark theme that keeps distractions out of the way.</li></ul>
+
+    <h2>Tips to type faster</h2>
+    <ul><li>Practise for 10 to 15 minutes a day. Short, regular sessions beat long, occasional ones.</li><li>Learn touch typing with your fingers on the home row, and resist looking at the keyboard.</li><li>Build accuracy first. Corrections cost more time than a steady, slightly slower pace.</li><li>Keep your wrists relaxed and your posture comfortable to avoid strain on longer sessions.</li></ul>
+
+    <h2>Frequently asked questions</h2>
+    <h3>What is a good typing speed?</h3><p>Commonly cited estimates put the average adult at around 40 words per minute on a keyboard. Around 60 WPM is considered above average, and professional typists often exceed 80 WPM.</p><h3>How is WPM calculated on typingspeed.lol?</h3><p>Net WPM counts correctly typed characters, divides by five (the standard length of one word), subtracts uncorrected errors, and scales the result to one minute.</p><h3>Is typingspeed.lol free?</h3><p>Yes. The typing test is free to use with no sign-up. Ads appear only on the results screen, never while you type.</p><h3>Are my keystrokes stored or sent anywhere?</h3><p>No. Keystrokes are processed in your browser and never uploaded. Only your personal best scores and preferences are saved locally on your device.</p>
   </section>
 
   <!-- 4. FOOTER WITH ADSENSE-REQUIRED POLICY & INFO LINKS -->
   <footer>
+    <div class="footer-credit">Built by <a href="https://pratiknilange.in" rel="author">Pratik Nilange</a></div>
     <div><kbd>TAB</kbd> or <kbd>ESC</kbd> restart &bull; <kbd>CTRL+BKSP</kbd> clear word</div>
     <nav class="footer-links" aria-label="Site information and policies">
-      <button type="button" class="footer-link" data-modal="about">About</button>
-      <button type="button" class="footer-link" data-modal="privacy">Privacy Policy</button>
-      <button type="button" class="footer-link" data-modal="terms">Terms</button>
-      <button type="button" class="footer-link" data-modal="contact">Contact</button>
+      <a class="footer-link" href="/about.html">About</a>
+      <a class="footer-link" href="/privacy.html">Privacy Policy</a>
+      <a class="footer-link" href="/terms.html">Terms</a>
+      <a class="footer-link" href="/contact.html">Contact</a>
       <button type="button" class="footer-link" id="manage-cookies-btn">Cookies</button>
     </nav>
   </footer>
@@ -1403,7 +1470,7 @@
   <div class="consent-banner" id="consent-banner" role="region" aria-label="Cookie consent">
     <div>
       We store local preferences and high scores in your browser and display Google AdSense ads on the results screen.
-      <button type="button" class="footer-link" data-modal="privacy">Read Privacy Policy</button>
+      <a class="footer-link" href="/privacy.html">Read Privacy Policy</a>
     </div>
     <div class="consent-actions">
       <button type="button" class="consent-btn essential" id="consent-essential">Non-Personalized</button>
@@ -2448,17 +2515,27 @@
         });
       }
 
+      function requestAd(slot, box) {
+        if (!slot || slot.dataset.requested) return;
+        const adSlotId = slot.getAttribute('data-ad-slot');
+        if (!adSlotId || adSlotId.startsWith('REPLACE')) return;
+        slot.dataset.requested = '1';
+        // Reveal the box only when AdSense reports a filled unit.
+        const obs = new MutationObserver(() => {
+          const st = slot.getAttribute('data-ad-status');
+          if (st === 'filled') { box.classList.add('has-ad'); obs.disconnect(); }
+          else if (st === 'unfilled') { obs.disconnect(); }
+        });
+        obs.observe(slot, { attributes: true, attributeFilter: ['data-ad-status'] });
+        try {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (err) { obs.disconnect(); }
+      }
+
       function requestResultsAd() {
-        if (state.adRequested) return;
-        const slot = document.querySelector('#adsense-results-container ins.adsbygoogle');
-        if (slot && window.adsbygoogle) {
-          try {
-            (window.adsbygoogle = window.adsbygoogle || []).push({});
-            state.adRequested = true;
-          } catch (err) {
-            // AdSense script not yet active
-          }
-        }
+        requestAd(document.querySelector('#adsense-results-container ins.adsbygoogle'), document.getElementById('results-ad-slot'));
+        requestAd(document.querySelector('#ad-left ins.adsbygoogle'), document.getElementById('ad-left'));
+        requestAd(document.querySelector('#ad-right ins.adsbygoogle'), document.getElementById('ad-right'));
       }
 
       function renderReceipt(stats) {
